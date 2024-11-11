@@ -24,6 +24,11 @@ function Transactions() {
   const [transactionCurrency, setTransactionCurrency] = useState('');
   const [transactionTo, setTransactionTo] = useState('');
   const [error, setError] = useState(null);
+  const [isPasswordPopupVisible, setIsPasswordPopupVisible] = useState(false);
+  const [employeePassword, setEmployeePassword] = useState('');
+  const [isPasswordCorrect, setIsPasswordCorrect] = useState(false);
+
+  const correctPassword = 'StrongPassword123!'; // Hardcoded strong password
 
   const handleAddTransaction = () => {
     if (!selectedAccount || !transactionAmount || !transactionType || !transactionCurrency) {
@@ -37,6 +42,21 @@ function Transactions() {
       return;
     }
 
+    // Show password pop-up for confirmation
+    setIsPasswordPopupVisible(true);
+  };
+
+  const handlePasswordSubmit = () => {
+    if (employeePassword === correctPassword) {
+      setIsPasswordCorrect(true);
+      processTransaction(); // Proceed with transaction if password is correct
+    } else {
+      setError("Incorrect password. Please try again.");
+    }
+  };
+
+  const processTransaction = () => {
+    const amount = parseFloat(transactionAmount);
     const updatedAccounts = [...accounts];
     const accountIndex = updatedAccounts.findIndex((account) => account.name === selectedAccount);
 
@@ -72,8 +92,8 @@ function Transactions() {
           timestamp: new Date().toLocaleString(),
         };
 
-        // Add the new transaction at the top of the history
-        setTransactionHistory(prevHistory => [newTransaction, ...prevHistory].slice(0, 3)); // Keep only the 3 latest transactions
+        // Add the new transaction at the top of the history (keep only the 3 latest transactions)
+        setTransactionHistory(prevHistory => [newTransaction, ...prevHistory].slice(0, 3));
         setError(null);
       } else {
         setError("Insufficient funds for transfer.");
@@ -91,8 +111,8 @@ function Transactions() {
         timestamp: new Date().toLocaleString(),
       };
 
-      // Add the new transaction at the top of the history
-      setTransactionHistory(prevHistory => [newTransaction, ...prevHistory].slice(0, 3)); // Keep only the 3 latest transactions
+      // Add the new transaction at the top of the history (keep only the 3 latest transactions)
+      setTransactionHistory(prevHistory => [newTransaction, ...prevHistory].slice(0, 3));
     }
 
     // Update the accounts
@@ -102,6 +122,7 @@ function Transactions() {
     setTransactionCurrency('');
     setTransactionTo('');
     setSelectedAccount('');
+    setIsPasswordPopupVisible(false); // Close password popup after processing the transaction
   };
 
   return (
@@ -173,6 +194,22 @@ function Transactions() {
         )}
         <button onClick={handleAddTransaction} className="auth-button">Add Transaction</button>
       </div>
+
+      {/* Password Confirmation Pop-Up */}
+      {isPasswordPopupVisible && (
+        <div className="password-popup">
+          <h3>Enter Employee Password to Confirm</h3>
+          <input
+            type="password"
+            value={employeePassword}
+            onChange={(e) => setEmployeePassword(e.target.value)}
+            placeholder="Password"
+            className="input-field"
+            required
+          />
+          <button onClick={handlePasswordSubmit} className="auth-button">Confirm</button>
+        </div>
+      )}
 
       {/* Transaction History */}
       <div className="transaction-history">
