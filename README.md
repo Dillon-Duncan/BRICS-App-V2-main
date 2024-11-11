@@ -57,12 +57,10 @@ git clone https://github.com/Dillon-Duncan/BRICS-App-V2-main.git
 cd BRICS-App-V2
 
 2. Install backend dependencies:
-   bash
-cd backend
+open backend in integrated terminal
 
 3. Install frontend dependencies:
-   bash
-cd ../frontend
+open frontend in integrated terminal
 npm install
 
 4. Create a .env file in the backend directory with the following variables:
@@ -77,13 +75,11 @@ PORT=8080
 ## Running the Application
 
 1. Start the backend server:
-   bash
-cd backend
+open backend in integrated terminal
 npm start
 
 2. Start the frontend development server:
-   bash
-cd frontend
+open frontend in integrated terminal
 npm start
 
 The application will be available at `http://localhost:3000`
