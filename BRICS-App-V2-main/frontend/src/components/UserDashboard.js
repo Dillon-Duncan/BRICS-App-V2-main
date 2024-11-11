@@ -15,26 +15,27 @@ function UserDashboard() {
 
   return (
     <div className="dashboard-container">
+      {/* Navigation */}
       <nav className="dashboard-nav">
         <div className="nav-brand">BRICS Banking</div>
         <div className="nav-links">
-          <Link to="/budget">Budget</Link>
-          <Link to="/transactions">Transactions</Link>
-          <button onClick={handleLogout} className="logout-btn">Logout</button>
+          <Link to="/budget" className="nav-link">Budget</Link>
+          <Link to="/transactions" className="nav-link">Transactions</Link>
+          <button onClick={handleLogout} className="auth-button logout-btn">Logout</button>
         </div>
       </nav>
-      
+
+      {/* Dashboard Content */}
       <div className="dashboard-content">
         <div className="welcome-section">
           <h1>Welcome, {user?.userName || 'User'}!</h1>
-          <p>Account Number: {user?.accNumber}</p>
         </div>
-        
+
         <div className="dashboard-widgets">
           <div className="widget">
             <Budget />
           </div>
-          
+
           <div className="widget">
             <Transactions />
           </div>

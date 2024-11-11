@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { registerUser } from '../api';
 import { useNavigate, Link } from 'react-router-dom';
+import '../styles/global.css';
 
 function Register() {
   const [form, setForm] = useState({
@@ -56,125 +57,139 @@ function Register() {
 
   return (
     <div className="auth-container">
-      <h2 className="form-title">Create New Account</h2>
-      
-      <form onSubmit={handleSubmit} className="auth-form">
-        <div className="form-group">
-          <input
-            type="text"
-            name="firstName"
-            value={form.firstName}
-            onChange={handleChange}
-            placeholder="First Name"
-            required
-            autoComplete="given-name"
-          />
-        </div>
+      <div className="auth-card">
+        <h2 className="form-title">Create New Account</h2>
 
-        <div className="form-group">
-          <input
-            type="text"
-            name="surname"
-            value={form.surname}
-            onChange={handleChange}
-            placeholder="Surname"
-            required
-            autoComplete="family-name"
-          />
-        </div>
+        <form onSubmit={handleSubmit} className="auth-form register-form">
+          {/* Grouping First Name and Surname in a row */}
+          <div className="form-group half-width">
+            <input
+              type="text"
+              name="firstName"
+              value={form.firstName}
+              onChange={handleChange}
+              placeholder="First Name"
+              required
+              autoComplete="given-name"
+              className="input-field"
+            />
+          </div>
 
-        <div className="form-group">
-          <input
-            type="text"
-            name="userName"
-            value={form.userName}
-            onChange={handleChange}
-            placeholder="Username"
-            required
-            autoComplete="username"
-          />
-        </div>
+          <div className="form-group half-width">
+            <input
+              type="text"
+              name="surname"
+              value={form.surname}
+              onChange={handleChange}
+              placeholder="Surname"
+              required
+              autoComplete="family-name"
+              className="input-field"
+            />
+          </div>
 
-        <div className="form-group">
-          <input
-            type="text"
-            name="idNumber"
-            value={form.idNumber}
-            onChange={handleChange}
-            placeholder="ID Number"
-            pattern="[0-9]*"
-            required
-            autoComplete="off"
-          />
-        </div>
+          {/* Grouping Username and ID Number in a row */}
+          <div className="form-group half-width">
+            <input
+              type="text"
+              name="userName"
+              value={form.userName}
+              onChange={handleChange}
+              placeholder="Username"
+              required
+              autoComplete="username"
+              className="input-field"
+            />
+          </div>
 
-        <div className="form-group">
-          <select
-            name="country"
-            value={form.country}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select Country</option>
-            <option value="Brazil">Brazil</option>
-            <option value="Russia">Russia</option>
-            <option value="India">India</option>
-            <option value="China">China</option>
-            <option value="South Africa">South Africa</option>
-          </select>
-        </div>
+          <div className="form-group half-width">
+            <input
+              type="text"
+              name="idNumber"
+              value={form.idNumber}
+              onChange={handleChange}
+              placeholder="ID Number"
+              pattern="[0-9]*"
+              required
+              autoComplete="off"
+              className="input-field"
+            />
+          </div>
 
-        <div className="form-group">
-          <input
-            type="tel"
-            name="mobileNumber"
-            value={form.mobileNumber}
-            onChange={handleChange}
-            placeholder="Mobile Number"
-            pattern="[0-9]*"
-            required
-            autoComplete="tel"
-          />
-        </div>
+          {/* Grouping Country and Mobile Number in a row */}
+          <div className="form-group half-width">
+            <select
+              name="country"
+              value={form.country}
+              onChange={handleChange}
+              required
+              className="input-field"
+            >
+              <option value="">Select Country</option>
+              <option value="Brazil">Brazil</option>
+              <option value="Russia">Russia</option>
+              <option value="India">India</option>
+              <option value="China">China</option>
+              <option value="South Africa">South Africa</option>
+            </select>
+          </div>
 
-        <div className="form-group">
-          <input
-            type="text"
-            name="accNumber"
-            value={form.accNumber}
-            onChange={handleChange}
-            placeholder="Account Number"
-            pattern="[0-9]*"
-            required
-            autoComplete="off"
-          />
-        </div>
+          <div className="form-group half-width">
+            <input
+              type="tel"
+              name="mobileNumber"
+              value={form.mobileNumber}
+              onChange={handleChange}
+              placeholder="Mobile Number"
+              pattern="[0-9]*"
+              required
+              autoComplete="tel"
+              className="input-field"
+            />
+          </div>
 
-        <div className="form-group">
-          <input
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            placeholder="Password"
-            required
-            autoComplete="new-password"
-          />
-          <small className="password-hint">
-            Password must contain at least 8 characters, one uppercase letter, and one special character
-          </small>
-        </div>
+          {/* Grouping Account Number and Password in a row */}
+          <div className="form-group half-width">
+            <input
+              type="text"
+              name="accNumber"
+              value={form.accNumber}
+              onChange={handleChange}
+              placeholder="Account Number"
+              pattern="[0-9]*"
+              required
+              autoComplete="off"
+              className="input-field"
+            />
+          </div>
 
-        {error && <div className="error-message">{error}</div>}
+          <div className="form-group half-width">
+            <input
+              type="password"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              placeholder="Password"
+              required
+              autoComplete="new-password"
+              className="input-field"
+            />
+            <small className="password-hint">
+              Password must contain at least 8 characters, one uppercase letter, and one special character.
+            </small>
+          </div>
 
-        <button type="submit" className="auth-button">
-          Register
-        </button>
+          {error && <div className="error-message">{error}</div>}
 
-        <div className="auth-link">
-          <p>Already have an account? <Link to="/login">Login here</Link></p>
-        </div>
-      </form>
+          <button type="submit" className="auth-button">
+            Register
+          </button>
+
+          <div className="auth-link">
+            <p>Already have an account? <Link to="/login">Login here</Link></p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

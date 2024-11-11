@@ -25,7 +25,6 @@ function Login() {
 
   const handleEmployeeToggle = (e) => {
     setIsEmployee(e.target.checked);
-    // Clear account number when switching to employee login
     if (e.target.checked) {
       setForm(prev => ({
         ...prev,
@@ -59,70 +58,64 @@ function Login() {
 
   return (
     <div className="auth-container">
-      <h2 className="form-title">{isEmployee ? 'Employee Login' : 'User Login'}</h2>
-      
-      <form onSubmit={handleSubmit} className="auth-form">
-        <div className="form-group">
-          <input
-            type="text"
-            name="userName"
-            value={form.userName}
-            onChange={handleChange}
-            placeholder="Username"
-            required
-            autoComplete="username"
-          />
-        </div>
-
-        {!isEmployee && (
+      <div className="auth-card">
+        <h2 className="form-title">{isEmployee ? 'Employee Login' : 'User Login'}</h2>
+        
+        <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
             <input
               type="text"
-              name="accNumber"
-              value={form.accNumber}
+              name="userName"
+              value={form.userName}
               onChange={handleChange}
-              placeholder="Account Number"
-              required={!isEmployee}
-              autoComplete="off"
+              placeholder="Username"
+              required
+              autoComplete="username"
+              className="input-field"
             />
           </div>
-        )}
 
-        <div className="form-group">
-          <input
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            placeholder={isEmployee ? "Employee Password" : "Password"}
-            required
-            autoComplete="current-password"
-          />
-        </div>
+          {!isEmployee && (
+            <div className="form-group">
+              <input
+                type="text"
+                name="accNumber"
+                value={form.accNumber}
+                onChange={handleChange}
+                placeholder="Account Number"
+                required={!isEmployee}
+                autoComplete="off"
+                className="input-field"
+              />
+            </div>
+          )}
 
-        <div className="checkbox-wrapper">
-          <label>
+          <div className="form-group">
             <input
-              type="checkbox"
-              checked={isEmployee}
-              onChange={handleEmployeeToggle}
+              type="password"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              placeholder={isEmployee ? "Employee Password" : "Password"}
+              required
+              autoComplete="current-password"
+              className="input-field"
             />
-            Employee Login
-          </label>
-        </div>
-
-        {error && <div className="error-message">{error}</div>}
-
-        <button type="submit" className="auth-button">
-          Login
-        </button>
-
-        {!isEmployee && (
-          <div className="auth-link">
-            <p>Don't have an account? <Link to="/register">Register here</Link></p>
           </div>
-        )}
-      </form>
+
+          {error && <div className="error-message">{error}</div>}
+
+          <button type="submit" className="auth-button">
+            Login
+          </button>
+
+          {!isEmployee && (
+            <div className="auth-link">
+              <p>Don't have an account? <Link to="/register">Register here</Link></p>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
