@@ -209,19 +209,30 @@ app.post('/employee-login', async (req, res) => {
     });
   }
 
-  res.json({ message: 'Employee login successful' });
+  const token = jwt.sign({ role: 'employee' }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  res.cookie('token', token, { 
+    httpOnly: true, 
+    secure: process.env.NODE_ENV === 'production', 
+    maxAge: 3600000 
+  });
+
+  res.json({ message: 'Employee login successful', token });
 });
 
-app.post('/budget', authenticateToken, async (req, res) => {
-  const { amount } = req.body;
-  const user = await User.findById(req.user.id);
 
-  if (!user) return res.status(404).json({ error: 'User not found' });
+// Get all transactions for employees
+app.get('/api/transactions/all', authenticateToken, async (req, res) => {
+  if (req.user.role !== 'employee') {
+    return res.status(403).json({ error: 'Access denied' });
+  }
 
-  user.budget.amount = amount;
-  await user.save();
+  const users = await User.find({}, 'userName transactions');
+  const allTransactions = users.map(user => ({
+    userName: user.userName,
+    transactions: user.transactions,
+  }));
 
-  res.json({ message: 'Budget set successfully', budget: user.budget });
+  res.json(allTransactions);
 });
 
 app.post('/transactions', authenticateToken, async (req, res) => {

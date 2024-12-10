@@ -42,9 +42,19 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    // Clear user and token data from state
     setUser(null);
     setToken(null);
-    localStorage.clear();
+
+    // Clear sensitive data from localStorage (you can adjust based on your app's data)
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+
+    // Optionally, you can clear cookies if the token is stored there
+    document.cookie = "token=; Max-Age=0; path=/;";  // If you're using cookies for authentication
+
+    // Redirect user to the login page (or another page of your choice)
+    window.location.href = '/login';  // Or use navigation methods based on your router
   };
 
   const value = {
