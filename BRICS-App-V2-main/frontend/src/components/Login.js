@@ -36,16 +36,15 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-  
+
     try {
       const credentials = {
         username: form.userName,
         password: form.password,
         ...(isEmployee ? {} : { accNumber: form.accNumber })
       };
-  
       const loginResponse = await login(credentials, isEmployee);
-  
+
       if (loginResponse.success) {
         navigate(isEmployee ? '/employee-dashboard' : '/user-dashboard');
       } else {
@@ -60,51 +59,63 @@ function Login() {
     <div className="auth-container">
       <div className="auth-card">
         <h2 className="form-title">{isEmployee ? 'Employee Login' : 'User Login'}</h2>
-        
-        <form onSubmit={handleSubmit} className="auth-form">
-          <label>
-            Username:
-            <input 
-              type="text" 
-              name="userName" 
-              value={form.userName}
-              onChange={handleChange} 
-              required
-            />
-          </label>
 
-          {!isEmployee && (
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group full-width">
             <label>
-              Account Number:
-              <input 
-                type="text" 
-                name="accNumber" 
-                value={form.accNumber}
-                onChange={handleChange} 
+              Username:
+              <input
+                type="text"
+                name="userName"
+                value={form.userName}
+                onChange={handleChange}
                 required
+                className="input-field"
               />
             </label>
+          </div>
+
+          {!isEmployee && (
+            <div className="form-group full-width">
+              <label>
+                Account Number:
+                <input
+                  type="text"
+                  name="accNumber"
+                  value={form.accNumber}
+                  onChange={handleChange}
+                  className="input-field"
+                />
+              </label>
+            </div>
           )}
 
-          <label>
-            Password:
-            <input 
-              type="password" 
-              name="password" 
-              value={form.password}
-              onChange={handleChange} 
-              required
-            />
-          </label>
+          <div className="form-group full-width">
+            <label>
+              Password:
+              <input
+                type="password"
+                name="password"
+                value={form.password}
+                onChange={handleChange}
+                required
+                className="input-field"
+              />
+            </label>
+          </div>
 
           <div className="auth-footer">
             <label>
               <input type="checkbox" onChange={handleEmployeeToggle} /> Employee Login
             </label>
-            {error && <p className="error">{error}</p>}
-            <button type="submit" className="btn">{isEmployee ? 'Login as Employee' : 'Login'}</button>
+            {error && <p className="error-message">{error}</p>}
+            <button type="submit" className="auth-button">{isEmployee ? 'Login as Employee' : 'Login'}</button>
           </div>
         </form>
+
+        <div className="auth-link">
+          <p>Don't have an account? <Link to="/register">Register here</Link></p>
+        </div>
       </div>
     </div>
   );

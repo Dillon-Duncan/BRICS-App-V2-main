@@ -130,7 +130,6 @@ function Transactions() {
       <h2 className="form-title">Transactions</h2>
       {error && <div className="error-message">{error}</div>}
 
-      {/* Transaction Form */}
       <div className="transaction-form">
         <select
           value={selectedAccount}
@@ -195,7 +194,6 @@ function Transactions() {
         <button onClick={handleAddTransaction} className="auth-button">Add Transaction</button>
       </div>
 
-      {/* Password Confirmation Pop-Up */}
       {isPasswordPopupVisible && (
         <div className="password-popup">
           <h3>Enter Employee Password to Confirm</h3>
@@ -211,7 +209,6 @@ function Transactions() {
         </div>
       )}
 
-      {/* Transaction History */}
       <div className="transaction-history">
         <h3>Transaction History</h3>
         {transactionHistory.length === 0 ? (

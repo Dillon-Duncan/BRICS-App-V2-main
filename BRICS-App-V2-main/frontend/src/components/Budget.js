@@ -34,7 +34,6 @@ function Budget() {
     <div className="budget-container">
       <h2 className="form-title">Manage Your Budgets</h2>
 
-      {/* Display all user budgets (BRICS currencies) */}
       <div className="budget-list">
         <h3>Current Budgets:</h3>
         <div className="budget-grid">
@@ -53,7 +52,6 @@ function Budget() {
         </div>
       </div>
 
-      {/* Display input to add funds to the selected budget */}
       {selectedCurrency && (
         <div className="budget-update">
           <h4>Add Funds to {selectedCurrency}</h4>

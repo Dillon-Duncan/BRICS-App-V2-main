@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import Budget from './Budget';
 import Transactions from './Transactions';
+import '../styles/global.css';
 
 function UserDashboard() {
   const { user, logout } = useAuth();
@@ -15,7 +16,6 @@ function UserDashboard() {
 
   return (
     <div className="dashboard-container">
-      {/* Navigation */}
       <nav className="dashboard-nav">
         <div className="nav-brand">BRICS Banking</div>
         <div className="nav-links">
@@ -25,7 +25,6 @@ function UserDashboard() {
         </div>
       </nav>
 
-      {/* Dashboard Content */}
       <div className="dashboard-content">
         <div className="welcome-section">
           <h1>Welcome, {user?.userName || 'User'}!</h1>

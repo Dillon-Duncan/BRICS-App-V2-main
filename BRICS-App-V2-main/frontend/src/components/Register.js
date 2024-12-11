@@ -61,8 +61,7 @@ function Register() {
         <h2 className="form-title">Create New Account</h2>
 
         <form onSubmit={handleSubmit} className="auth-form register-form">
-          {/* Grouping First Name and Surname in a row */}
-          <div className="form-group half-width">
+          <div className="form-group full-width">
             <input
               type="text"
               name="firstName"
@@ -75,7 +74,7 @@ function Register() {
             />
           </div>
 
-          <div className="form-group half-width">
+          <div className="form-group full-width">
             <input
               type="text"
               name="surname"
@@ -88,8 +87,7 @@ function Register() {
             />
           </div>
 
-          {/* Grouping Username and ID Number in a row */}
-          <div className="form-group half-width">
+          <div className="form-group full-width">
             <input
               type="text"
               name="userName"
@@ -102,7 +100,7 @@ function Register() {
             />
           </div>
 
-          <div className="form-group half-width">
+          <div className="form-group full-width">
             <input
               type="text"
               name="idNumber"
@@ -116,8 +114,7 @@ function Register() {
             />
           </div>
 
-          {/* Grouping Country and Mobile Number in a row */}
-          <div className="form-group half-width">
+          <div className="form-group full-width">
             <select
               name="country"
               value={form.country}
@@ -134,7 +131,7 @@ function Register() {
             </select>
           </div>
 
-          <div className="form-group half-width">
+          <div className="form-group full-width">
             <input
               type="tel"
               name="mobileNumber"
@@ -148,8 +145,7 @@ function Register() {
             />
           </div>
 
-          {/* Grouping Account Number and Password in a row */}
-          <div className="form-group half-width">
+          <div className="form-group full-width">
             <input
               type="text"
               name="accNumber"
@@ -163,7 +159,7 @@ function Register() {
             />
           </div>
 
-          <div className="form-group half-width">
+          <div className="form-group full-width">
             <input
               type="password"
               name="password"
