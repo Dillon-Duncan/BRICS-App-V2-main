@@ -62,58 +62,48 @@ function Login() {
         <h2 className="form-title">{isEmployee ? 'Employee Login' : 'User Login'}</h2>
         
         <form onSubmit={handleSubmit} className="auth-form">
-          <div className="form-group">
-            <input
-              type="text"
-              name="userName"
+          <label>
+            Username:
+            <input 
+              type="text" 
+              name="userName" 
               value={form.userName}
-              onChange={handleChange}
-              placeholder="Username"
+              onChange={handleChange} 
               required
-              autoComplete="username"
-              className="input-field"
             />
-          </div>
+          </label>
 
           {!isEmployee && (
-            <div className="form-group">
-              <input
-                type="text"
-                name="accNumber"
+            <label>
+              Account Number:
+              <input 
+                type="text" 
+                name="accNumber" 
                 value={form.accNumber}
-                onChange={handleChange}
-                placeholder="Account Number"
-                required={!isEmployee}
-                autoComplete="off"
-                className="input-field"
+                onChange={handleChange} 
+                required
               />
-            </div>
+            </label>
           )}
 
-          <div className="form-group">
-            <input
-              type="password"
-              name="password"
+          <label>
+            Password:
+            <input 
+              type="password" 
+              name="password" 
               value={form.password}
-              onChange={handleChange}
-              placeholder={isEmployee ? "Employee Password" : "Password"}
+              onChange={handleChange} 
               required
-              autoComplete="current-password"
-              className="input-field"
             />
+          </label>
+
+          <div className="auth-footer">
+            <label>
+              <input type="checkbox" onChange={handleEmployeeToggle} /> Employee Login
+            </label>
+            {error && <p className="error">{error}</p>}
+            <button type="submit" className="btn">{isEmployee ? 'Login as Employee' : 'Login'}</button>
           </div>
-
-          {error && <div className="error-message">{error}</div>}
-
-          <button type="submit" className="auth-button">
-            Login
-          </button>
-
-          {!isEmployee && (
-            <div className="auth-link">
-              <p>Don't have an account? <Link to="/register">Register here</Link></p>
-            </div>
-          )}
         </form>
       </div>
     </div>
